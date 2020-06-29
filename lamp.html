@@ -23,6 +23,7 @@
             background-color:#fcfcbf;
             border-radius:100%;
             box-shadow: 0 0 92px 17px rgba(230,223,147,1);
+            display:none;
         }
         .light-bulb-off{
             height:100px;
@@ -54,6 +55,7 @@
             height:25px;
             width:10px;
             align-items:center;
+            display:none;
         }
         .switch-off{
             background-color:black;
@@ -66,21 +68,55 @@
 <body>
 
 <div class="container">
-    <!-- <div class="light-bulb-on"></div>-->
+    <div class="light-bulb-on"></div>
     <div class="light-bulb-off"></div>
     <div class="light-bulb-base"></div>
 
     <div id="switch1">
         <div class="switch-off"></div>
-        <!-- <div class="switch-on"></div> -->
+        <div class="switch-on"></div>
     </div>
 </div>
 
 <script>
-    let switch1 = document.getElementById('switch1');
-    let lever = document.getElementsByClassName('switch-on');
-    let light = document.getElementsByClassName('light-bulb-on');
+    let isOn = false;
 
+    let switch1 = document.getElementById('switch1');
+
+
+    switch1.addEventListener("click", click);
+
+    function click() {
+        console.log("Testen of de click werkt");
+        changeLever();
+        lightBulb();
+        isOn = !isOn;
+    }
+
+    function changeLever(){
+        let switchon = document.getElementsByClassName("switch-on")[0];
+        let switchoff = document.getElementsByClassName("switch-off")[0];
+        if(isOn === true) {
+            switchon.style.display = "none";
+            switchoff.style.display = "block";
+        } else {
+            // inline, inline-block, block
+            switchon.style.display = "block";
+            switchoff.style.display = "none";
+        }
+
+    }
+    function lightBulb() {
+        let bulbon = document.getElementsByClassName("light-bulb-on")[0];
+        let bulboff = document.getElementsByClassName("light-bulb-off")[0];
+        if (isOn === true) {
+            bulbon.style.display = "none";
+            bulboff.style.display = "block";
+        } else {
+            bulbon.style.display = "block";
+            bulboff.style.display = "none";
+        }
+    }
     // Stap 1:
     // Voeg een click -> event-listener toe aan switch1
     // Wanneer op 1 geklikt wordt, moet de lamp aan of uit gaan.
